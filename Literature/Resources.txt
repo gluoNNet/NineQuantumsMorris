@@ -1,0 +1,20 @@
+Please add notes related to the links!
+
+ 1 - ...
+ 
+https://towardsdatascience.com/how-to-do-deep-learning-on-graphs-with-graph-convolutional-networks-7d2250723780
+
+ 2 - Repository of the NNMM paper including the dataset:
+
+https://github.com/AGalassi/NNMM
+
+ 3 - Documentation for Dwave Q.Computers:
+
+https://docs.ocean.dwavesys.com/en/latest/projects.html
+
+ 4 - AI in Nine Men's Morris:
+
+https://jitpaul.blog/2017/07/18/ai-in-nine-men-s-morris-game/
+
+
+
