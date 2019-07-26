@@ -1,7 +1,7 @@
 Please add notes related to the links!
 
  1 - ...
- 
+
 https://towardsdatascience.com/how-to-do-deep-learning-on-graphs-with-graph-convolutional-networks-7d2250723780
 
  2 - Repository of the NNMM paper including the dataset:
@@ -16,5 +16,6 @@ https://docs.ocean.dwavesys.com/en/latest/projects.html
 
 https://jitpaul.blog/2017/07/18/ai-in-nine-men-s-morris-game/
 
-
-
+ 5 - Introduction to Quantum Annealing
+ 
+ https://docs.dwavesys.com/docs/latest/c_gs_2.html
