@@ -19,6 +19,8 @@ class Board:
 
     def place_marker(self,pos, player_num):
         # Check if position is vacant
+        if self.board_array[pos] == player_num:
+            return True
         if self.board_array[pos] == 0:
             self.board_array[pos] = player_num
             if player_num == 1:
@@ -28,12 +30,12 @@ class Board:
         else:
             print('Position already set on board!')
             return False
-        self.check_mill()
+
         self.check_num_markers()
+        self.check_mill()
         return True
 
     def move_marker(self,FROM, TO):
-        print('test')
         if self.board_array[FROM] == 0:
             print('No marker at from position')
             return False
@@ -41,7 +43,9 @@ class Board:
             print('TO position already used')
             return False
         # change markers
-        self.board_array[TO],self.board_array[FROM] = self.board_array[FROM],self.board_array[TO]
+        tmp = self.board_array[FROM]
+        self.board_array[FROM] = 0
+        self.board_array[TO] = tmp
         self.check_mill()
         return True
 
@@ -50,12 +54,13 @@ class Board:
         [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8]
         ]
         for neighbor in neighbors:
-            if self.board_array[neighbor].all() == 1:
+            if np.array_equal(self.board_array[neighbor],np.array([1,1,1])):
                 print(self)
                 sys.exit('Player number 1 wins!')
-            if self.board_array[neighbor].all() == 2:
+            if np.array_equal(self.board_array[neighbor],np.array([2,2,2])):
                 print(self)
                 sys.exit('Player number 2 wins!')
+
 
     def check_num_markers(self):
         if self.num_checkers_one > 3:
@@ -66,11 +71,11 @@ class Board:
 
 if __name__ == '__main__':
     b = Board()
-    print(b)
     b.place_marker(pos=0,player_num=1)
-    b.place_marker(pos=1,player_num=1)
-    b.place_marker(pos=2,player_num=1)
-
+    b.place_marker(pos=3,player_num=1)
+    b.board_array[0] = 2
     print(b)
+    print('Hello')
 
-    print(b)
+    #b.place_marker(pos=1,player_num=1)
+    #b.place_marker(pos=2,player_num=1)
