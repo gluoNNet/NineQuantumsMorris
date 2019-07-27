@@ -5,6 +5,8 @@ class Board:
     def __init__(self):
         # init empty board
         self.board_array = np.zeros(9,dtype=int)
+        self.num_checkers_one = 0
+        self.num_checkers_two = 0
         self.phase = 0
 
     def __str__(self):
@@ -19,10 +21,15 @@ class Board:
         # Check if position is vacant
         if self.board_array[pos] == 0:
             self.board_array[pos] = player_num
+            if player_num == 1:
+                self.num_checkers_one += 1
+            if player_num == 2:
+                self.num_checkers_two += 1
         else:
             print('Position already set on board!')
             return False
         self.check_mill()
+        self.check_num_markers()
         return True
 
     def move_marker(self,FROM, TO):
@@ -50,12 +57,20 @@ class Board:
                 print(self)
                 sys.exit('Player number 2 wins!')
 
+    def check_num_markers(self):
+        if self.num_checkers_one > 3:
+            sys.exit('Player 1 placed too many markers')
+        if self.num_checkers_two > 3:
+            sys.exit('Player 2 placed too many markers')
+
+
 if __name__ == '__main__':
     b = Board()
     print(b)
     b.place_marker(pos=0,player_num=1)
     b.place_marker(pos=1,player_num=1)
     b.place_marker(pos=2,player_num=1)
+
     print(b)
 
     print(b)
