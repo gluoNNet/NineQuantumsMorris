@@ -19,3 +19,7 @@ https://jitpaul.blog/2017/07/18/ai-in-nine-men-s-morris-game/
  5 - Introduction to Quantum Annealing
  
  https://docs.dwavesys.com/docs/latest/c_gs_2.html
+
+6 - A Gentle Introduction to Graph Neural Networks (Basics, DeepWalk, and GraphSage)
+
+https://towardsdatascience.com/a-gentle-introduction-to-graph-neural-network-basics-deepwalk-and-graphsage-db5d540d50b3
