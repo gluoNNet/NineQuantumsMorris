@@ -23,3 +23,7 @@ https://jitpaul.blog/2017/07/18/ai-in-nine-men-s-morris-game/
 6 - A Gentle Introduction to Graph Neural Networks (Basics, DeepWalk, and GraphSage)
 
 https://towardsdatascience.com/a-gentle-introduction-to-graph-neural-network-basics-deepwalk-and-graphsage-db5d540d50b3
+
+7 - NetworkX GitHub tutorial
+
+https://networkx.github.io/documentation/stable/tutorial.html
