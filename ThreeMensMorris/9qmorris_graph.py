@@ -32,10 +32,10 @@ embeded_graph = minorminer.find_embedding(H.edges(),connectivity_structure.edges
 dnx.draw_chimera_embedding(connectivity_structure,embeded_graph)
 #dnx.draw_chimera(G)
 #dnx.draw_chimera(H, node_color='b', node_shape='*', style='dashed', edge_color='b', width=3)
-plt.savefig('plot.png')
+plt.savefig('plot.png',dpi=200)
 plt.close()
 nx.draw_networkx(H, with_labels=False)
-plt.savefig('nx_plot.png')
+plt.savefig('nx_plot.png',dpi=200)
 sys.exit()
 b = Board()
 # FOR BOARD MARKERS:
