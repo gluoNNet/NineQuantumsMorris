@@ -14,12 +14,13 @@ GUI = True
 BACKGROUND = (90, 90, 90) # gray
 PLAYER1 = (10, 10, 10) # almost black :P
 PLAYER2 = (10, 10, 10) # almost black
-LINES = (90, 90, 90) # white
-franc = pygame.image.load(r'franc.png')
-euro = pygame.image.load(r'cent.png')
-franc= pygame.transform.scale(franc,(60,60))
-grid = pygame.image.load(r'grid.png')
-euro = pygame.transform.scale(euro,(60,60))
+LINES = (200, 200, 200) # white
+franc = pygame.image.load(r'up.png') # Enemy
+euro = pygame.image.load(r'down.png') # WE
+franc= pygame.transform.scale(franc,(70,70))
+grid = pygame.image.load(r'100perc.jpg')
+grid = pygame.transform.scale(grid,(960,600))
+euro = pygame.transform.scale(euro,(70,70))
 
 
 PIECE_SIZE = 30
@@ -117,7 +118,7 @@ class GameState:
         # Init pygame
         pygame.init()
         self.screen = pygame.display.set_mode((600, 600))
-        pygame.display.set_caption("Nine Men's Morris")
+        pygame.display.set_caption("Quantum Morris")
 
         # self.screen.fill(BACKGROUND)
 
@@ -168,15 +169,18 @@ class GameState:
     def draw_piece(self, pos, value):
         if value != 0:
             color = None
+            offset_move = 0
             if value > 0:
                 color = PLAYER1
                 image = euro
+                offset_move = -30
             else:
                 color = PLAYER2
                 image = franc
-            pygame.draw.circle(self.screen, color, [x*SCALE for x in pos], PIECE_SIZE)
-            pygame.draw.circle(self.screen, [x-10 for x in color], [x*SCALE for x in pos], PIECE_SIZE, int(PIECE_SIZE/6))
-            self.screen.blit(image, [x*SCALE-25 for x in pos])
+                offset_move = -40
+            #pygame.draw.circle(self.screen, color, [x*SCALE for x in pos], PIECE_SIZE)
+            #pygame.draw.circle(self.screen, [x-10 for x in color], [x*SCALE for x in pos], PIECE_SIZE, int(PIECE_SIZE/6))
+            self.screen.blit(image, [x*SCALE+offset_move for x in pos])
     def frame_step(self, input_vect, execute_opponent=True, skip_player=False, color=1):
         if color == 1:
             num_pieces = self.player_num_pieces
