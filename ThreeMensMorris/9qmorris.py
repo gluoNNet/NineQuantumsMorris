@@ -13,7 +13,7 @@ h_const = 100
 j_const = 1
 constraint_const = 2
 mill_constant = 0.1
-anti_mill_constant = 1
+anti_mill_constant = 2
 
 
 b = Board()
@@ -86,7 +86,7 @@ while not stopped:
         offset,
         vartype)
     sampler = dimod.SimulatedAnnealingSampler()
-    sample_set = sampler.sample(bqm,num_reads=20)
+    sample_set = sampler.sample(bqm,num_reads=10)
     #sampler = dimod.ExactSolver()
     #sample_set = sampler.sample(bqm)
     print(sample_set)
