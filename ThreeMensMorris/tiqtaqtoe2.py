@@ -10,6 +10,10 @@ max_checkers = 6
 our = np.zeros(num_spots,dtype=int)
 enemy = np.zeros(num_spots,dtype=int)
 h_const = 100
+j_const = 1
+constraint_const = 2
+mill_constant = 0.1
+
 
 b = Board()
 # FOR BOARD MARKERS:
@@ -34,17 +38,34 @@ while not stopped:
             linear[i+1] = 0
         #print(linear)
 
-    # Adding quadratic terms
+    # Adding quadratic terms for constraint
     quadratic = {}
     for i in range(1,num_spots):
         for j in range(i+1,num_spots+1):
-            quadratic[(i,j)] = 2
-    # Update linear
+            quadratic[(i,j)] = 2*constraint_const
+    # Update linear for constraint
     for i in range(1,num_spots+1):
-        linear[i] -= 2*c
+        linear[i] -= 2*c*constraint_const
 
-    offset = 0#-(c**2+num_spots) # Think about sign
+    offset = (c**2+num_spots)*constraint_const # Think about sign
 
+    # Set interactions, i.e. update quadratic
+    for i in range(num_spots):
+        if enemy[i]:
+            idx = b.get_neighbor_idx(i)
+            for j in idx:
+                if i > j:
+                    quadratic[(j+1,i+1)] += -j_const
+                else:
+                    quadratic[(i+1,j+1)] += -j_const
+
+    # update quadratic for mill energy decrease
+    for i in range(0,num_spots):
+        idx = b.get_rowcol_idx(i)
+        for j in idx:
+            if i < j:
+                quadratic[(i+1,j+1)] -= 2*mill_constant
+    #offset -= (2*num_spots)*mill_constant
     vartype = dimod.SPIN
 
     bqm = dimod.BinaryQuadraticModel(
@@ -54,6 +75,7 @@ while not stopped:
         vartype)
     sampler = dimod.SimulatedAnnealingSampler()
     sample_set = sampler.sample(bqm,num_reads=10)
+    print(sample_set)
     next_state = sample_set.samples()[0] # Maybe do sampling instead??
     for i in range(1,num_spots+1):
         if next_state[i]==1:

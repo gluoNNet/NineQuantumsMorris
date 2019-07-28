@@ -61,6 +61,27 @@ class Board:
                 print(self)
                 sys.exit('Player number 2 wins!')
 
+    def get_neighbor_idx(self,pos):
+        if pos == 0: return [1,3]
+        if pos == 1: return [0,2,4]
+        if pos == 2: return [1,5]
+        if pos == 3: return [0,4,6]
+        if pos == 4: return [1,3,5,7]
+        if pos == 5: return [2,4,8]
+        if pos == 6: return [3,7]
+        if pos == 7: return [4,6,8]
+        if pos == 8: return [5,7]
+
+    def get_rowcol_idx(self,pos):
+        if pos == 0: return [1,2,3,6]
+        if pos == 1: return [0,2,4,7]
+        if pos == 2: return [0,1,5,8]
+        if pos == 3: return [0,4,5,6]
+        if pos == 4: return [1,3,5,8]
+        if pos == 5: return [2,3,4,8]
+        if pos == 6: return [0,3,7,8]
+        if pos == 7: return [1,4,6,8]
+        if pos == 8: return [2,5,6,7]
 
     def check_num_markers(self):
         if self.num_checkers_one > 3:
