@@ -16,18 +16,25 @@ constraint_const = 3
 mill_constant = 0.1
 anti_mill_constant = 2
 
+#our   = np.array([0,1,1,0,0,1,0,1,1,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0])
+#enemy = np.array([0,0,0,0,1,0,1,0,0,1,1,0,0,1,0,1,0,1,0,1,0,0,1,0])
+#previous_enemy=enemy
+
 
 b = Board()
+b.board_array = our + 2*enemy
 # FOR BOARD MARKERS:
 # OURS IS 1
 # ENEMY IS 2
 # FREE IS 0
 
 ############################3
-def phase_2(enemy,our):
-    h_const_2          = 10
-    c                  = num_spots/2
-    constraint_const_2 = 10
+def phase_2(enemy,our,previous_enemy):
+    h_const_2          = 2
+    num_checkers_on_board = np.sum(our) + np.sum(enemy)
+    num_checker_constraint = - num_spots + num_checkers_on_board
+    c                  = num_checker_constraint
+    constraint_const_2 = 40
     j_const_2          = 2
     mill_constant_2    = 1
     linear = {}
@@ -92,29 +99,30 @@ def phase_2(enemy,our):
     #sampler = dimod.ExactSolver()
     #sample_set = sampler.sample(bqm)
     next_state = sample_set.samples()[0] # Maybe do sampling instead??
-    print(next_state) 
-    print("Previous: " + previous_enemy)
-    print("New: " + enemy)
-    return
+    #print(next_state) 
+    #print("Previous: " + str(previous_enemy))
+    #print("New: " + str(enemy))
+    #print(quadratic)
     for i in range(1,num_spots+1):
         if next_state[i]==1:
             enemy[i-1]=1
             b.place_marker(pos=i-1,player_num=2)
     # Find the move
     move = enemy - previous_enemy
+    print(move)
     for i in range(num_spots):
         if move[i]:
             move_to = i+1
-    print("Moved to: " + str(move_to))
+            print("Moved to: " + str(move_to))
     previous_enemy = list(enemy)
    
     print(b)
-  
+    print(sample_set) 
   # Choose our input
     our_pos = int(input('Give position to place marker (1-24): '))
     our[our_pos-1] = 1
     b.place_marker(pos=our_pos-1,player_num=1)
-
+    return
 ###############################33
    
 
@@ -124,7 +132,7 @@ while not stopped:
     if num_checkers_on_board >= max_checkers:
         print("Going into Phase 2")
         #sys.exit('Switch to phase 2')
-        phase_2(enemy,our)
+        phase_2(enemy,our,previous_enemy)
     num_checker_constraint = - num_spots + num_checkers_on_board + 2
     c = num_checker_constraint # just to simplify
     linear = {}
@@ -221,7 +229,7 @@ while not stopped:
     for i in range(num_spots):
         if move[i]:
             move_to = i+1
-    print("Moved to: " + str(move_to))
+            print("Moved to: " + str(move_to))
     previous_enemy = list(enemy)
    
    # Choose our input
