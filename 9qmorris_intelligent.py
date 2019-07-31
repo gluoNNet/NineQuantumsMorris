@@ -1,15 +1,15 @@
 import dimod
 from dwave.system.samplers import DWaveSampler
 from dwave.system.composites import EmbeddingComposite
-from board24 import Board
-import morris
+from boards.board24 import Board
+import gui
 import pygame
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 import sys
 
-game = morris.GameState()
+game = gui.GameState()
 
 num_spots = 24
 max_checkers = 18
@@ -126,7 +126,6 @@ while not stopped:
     graph_bqm = bqm.to_networkx_graph()
     nx.draw_networkx(graph_bqm, with_labels=False)
     values = [graph_bqm.get_edge_data(edge[0],edge[1],default=0) for edge in graph_bqm.edges()]
-    print(values)
     plt.savefig('nx_plot.png',dpi=200)
 
     sampler = dimod.SimulatedAnnealingSampler()
@@ -252,7 +251,6 @@ def phase_2(enemy,our,previous_enemy):
     previous_enemy = list(enemy)
 
     print(b)
-    print(sample_set)
   # Choose our input
     our_pos = int(input('Give position to place marker (1-24): '))
     our[our_pos-1] = 1
