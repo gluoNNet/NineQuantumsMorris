@@ -2,6 +2,12 @@
 This repository includes the code developed during the CERN Webfest 2019. 
 A D-Wave Quantum Annealer is used to find the minimum of a Hamiltonian that is formed using the setup of a 9 men's morris board. Currently this Hamiltonian is based on our logic, but it might be subject of a machine learning algortihm. 
 
+### Installation
+* Clone repository: `git clone https://github.com/gluoNNet/NineQuantumsMorris.git`
+* Change directory: `cd NineQuantumsMorris`
+* Install requirements with pip: `pip install -r requirements.txt`
+* Install Tkinter for python: `apt-get install python-tk`
+
 ### TODO
 - [ ] Update the models for better readability and better Hamiltonian calculation
 - [ ] Update gui.py for more readability 
