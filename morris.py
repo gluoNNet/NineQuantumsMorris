@@ -15,18 +15,17 @@ BACKGROUND = (90, 90, 90) # gray
 PLAYER1 = (10, 10, 10) # almost black :P
 PLAYER2 = (10, 10, 10) # almost black
 LINES = (200, 200, 200) # white
+GUI_SIZE = 600
 #LINES = (0,0,0) # black
 franc = pygame.image.load(r'up.png') # Enemy
 euro = pygame.image.load(r'down.png') # WE
 franc= pygame.transform.scale(franc,(70,70))
 euro = pygame.transform.scale(euro,(70,70))
 grid = pygame.image.load(r'halloween-background.jpg')
-grid = pygame.transform.scale(grid,(600,600))
+grid = pygame.transform.scale(grid,(GUI_SIZE,GUI_SIZE))
 
-
-
-PIECE_SIZE = 30
-SCALE = 40
+PIECE_SIZE = 70
+SCALE = GUI_SIZE / 15
 
 TAKE_PIECE_REWARD = 0.2
 WIN_REWARD = 1
@@ -62,8 +61,8 @@ def blockGetClickIndex():
 # Lookup table for what fields are above others, nicer and more readable than if's
 above_arr = [-1, -1, -1,    -1, 1, -1,    -1, 4, -1,    0, 3, 6,    8, 5, 2,    11, -1, 12,    10, 16, 13,    9, 19, 14]
 # Lookup table for coordinates
-coord_arr = np.array([(1,1), (7.5,1), (14,1),    (3,3), (7.5,3), (12,3),    (5,5), (7.5,5), (10,5),    (1,7.5), (3,7.5), (5,7.5),
-                    (10,7.5), (12,7.5), (14,7.5),    (5,10), (7.5,10), (10,10),    (3,12), (7.5,12), (12,12),    (1,14), (7.5,14), (14,14)], dtype=[('x', 'i4'),('y', 'i4')])
+coord_arr = np.array([(1.,1.), (7.5,1.), (14,1),    (3,3), (7.5,3), (12,3),    (5,5), (7.5,5), (10,5),    (1,7.5), (3,7.5), (5,7.5),
+                    (10.,7.5), (12.,7.5), (14,7.5),    (5,10), (7.5,10), (10,10),    (3,12), (7.5,12), (12,12),    (1,14), (7.5,14), (14,14)], dtype=[('x', 'f8'),('y', 'f8')])
 
 def indexAbove(i):
     return above_arr[i]
@@ -176,11 +175,11 @@ class GameState:
             if value > 0:
                 color = PLAYER1
                 image = euro
-                offset_move = -30
+                offset_move = -35
             else:
                 color = PLAYER2
                 image = franc
-                offset_move = -40
+                offset_move = -35
             #pygame.draw.circle(self.screen, color, [x*SCALE for x in pos], PIECE_SIZE)
             #pygame.draw.circle(self.screen, [x-10 for x in color], [x*SCALE for x in pos], PIECE_SIZE, int(PIECE_SIZE/6))
             self.screen.blit(image, [x*SCALE+offset_move for x in pos])
